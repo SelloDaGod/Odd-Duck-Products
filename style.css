@@ -1,0 +1,11 @@
+#Display{border:1px solid black}
+.images{
+    height: 250px;
+    width: 250px;
+    display: flexbox;
+    border-style:solid
+    
+}
+#image1{size: 20px; margin-right: 230px;}
+#image2{size: 20px;margin-right: 230px;}
+#image3{size: 20px;}
