@@ -155,9 +155,9 @@ new Chart(ctx,{
         }
     }
 });
-}
 const myJSON = JSON.stringify(products);
 window.localStorage.setItem("products",myJSON)
+}
 
   
 
