@@ -37,19 +37,17 @@ function getRandomProducts(arrayOfProducts) {
     let randomIndex3 = Math.random() * arrayOfProducts.length//getting a random number between 0 and 19
     randomIndex3 = Math.floor(randomIndex3)//rounding down the number
     // console.log("randomIndex1", randomIndex1)// console logging randomIndex1
-
-    if (randomIndex1 === randomIndex2) {
-        randomIndex1 = Math.random() * arrayOfProducts.length
-        randomIndex1 = Math.floor(randomIndex1)
-    }
-    else if (randomIndex2 === randomIndex3) {
-        randomIndex3 = Math.random() * arrayOfProducts.length
-        randomIndex3 = Math.floor(randomIndex3)
-    }
-    else if (randomIndex3 === randomIndex1) {
-        randomIndex1 = Math.random() * arrayOfProducts.length
-        randomIndex1 = Math.floor(randomIndex1)
-    }
+while(randomIndex1 === randomIndex2 || randomIndex1 === randomIndex3){
+    randomIndex1 = Math.random() * arrayOfProducts.length
+    randomIndex1 = Math.floor(randomIndex1)
+    randomIndex2 = Math.random() * arrayOfProducts.length
+    randomIndex2 = Math.floor(randomIndex2)
+}
+while(randomIndex3 === randomIndex1 || randomIndex3 === randomIndex2){
+    randomIndex3 = Math.random() * arrayOfProducts.length
+    randomIndex3 = Math.floor(randomIndex3)
+}
+    
 
     let randomProduct1 = arrayOfProducts[randomIndex1]// declaring randomProduct1 to equal a random product
     let randomProduct2 = arrayOfProducts[randomIndex2]// declaring randomProdcut2 to equal a random product
@@ -115,6 +113,7 @@ function ImageEvents(event) {
     }
     if (UserClicks >= 25) {
         document.getElementById("Display").removeEventListener("click", ImageEvents);
+    
         alert("OUT OF VOTES")
     }
     displayimage()
@@ -132,7 +131,35 @@ function Showresults(){
         ul.append(li);
     }
     document.body.append(ul);
+
+const ctx = document.getElementById("myChart");
+new Chart(ctx,{
+    type: "bar",
+    data: {
+        labels: [products[0].productName, products[1].productName, products[2].productName, products[3].productName, products[4].productName, products[5].productName, products[6].productName, products[7].productName, products[8].productName, products[9].productName,  products[10].productName, products[11].productName, products[12].productName, products[13].productName, products[14].productName, products[15].productName, products[16].productName, products[16].productName, products[17].productName, products[18].productName, ],
+        datasets: [{
+            label: "# of Times Show",
+            data: [products[0].timesShown, products[1].timesShown, products[2].timesShown, products[3].timesShown, products[4].timesShown, products[5].timesShown, products[6].timesShown, products[7].timesShown, products[8].timesShown, products[9].timesShown, products[10].timesShown, products[11].timesShown, products[12].timesShown, products[13].timesShown, products[14].timesShown, products[15].timesShown, products[16].timesShown, products[17].timesShown, products[18].timesShown,]
+        }, {
+            label: "# of votes",
+            data:[products[0].timesclicked, products[1].timesclicked, products[2].timesclicked, products[3].timesclicked, products[4].timesclicked, products[5].timesclicked, products[6].timesclicked, products[7].timesclicked, products[8].timesclicked, products[9].timesclicked, products[10].timesclicked, products[11].timesclicked, products[12].timesclicked, products[13].timesclicked, products[14].timesclicked, products[15].timesclicked, products[16].timesclicked, products[17].timesclicked, products[18].timesclicked ],
+
+        }]
+    },
+    options: {
+        indexAxis:"y",
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
 }
+const myJSON = JSON.stringify(products);
+window.localStorage.setItem("products",myJSON)
+
+  
 
 console.log(Showresults)
 // displayimage() // calling a funtion so the images can show up before clicking
